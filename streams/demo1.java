@@ -16,7 +16,7 @@ public class demo1 {
                             .collect(Collectors.toList());// terminal operation to produce result
 
                 System.out.println(l1);
-
+                //[6, 16, 26, 36, 46]
 
         //Example for streams using map
             List<Integer> l2=l//original source
@@ -25,6 +25,7 @@ public class demo1 {
                     .collect(Collectors.toList());// terminal operation to produce result
 
              System.out.println(l2);
+             //[2, 12, 22, 32, 42, 52, 62, 72, 82, 92]
     }
 
 }
