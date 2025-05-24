@@ -1,7 +1,47 @@
 # Java - Streams
 
 Stream API – one of the new feature introduced in Java 1.8 version along with Functional Interface and Lambda expression
+    -Consider it as pipeline ,through which our collection elements passes through it 
+    -while elements passing through pipeline,it performs various operation like sorting,filtering etc
+    -Useful when deals with bulk processing(can do parallel processing)
 
+![img](https://github.com/user-attachments/assets/c88fcd18-2062-403a-9b89-348f4c8a4ee6)
+As we have seen in above, operation are divided into Intermediate and Terminal operation.
+There are wide range of useful Stream API (function/method) available. We will categorize them below,
+
+# Intermediate operation 
+    -These operation transform the stream into another stream & more operations can be performed on top of it
+    -These operations are LAZY in nature,Means these operations get executed only when the terminal operation is invoked
+    Intermediate operation :
+            distinct()
+            filter()
+            map()
+            flatMap()
+            limit()
+            skip()
+            peek()
+            sorted()
+            concat()
+            empty()
+            generate()
+            iterate()
+            of()
+# Terminal Operation
+    -These operation triggers the processing of stream & produce teh output,Means after terminal operation used
+    - no more any other operation we can perform
+    Terminal operation :
+            allMatch()
+            anyMatch()
+            noneMatch()
+            collect()
+            count()
+            findAny()
+            findFirst()
+            forEach()
+            forEachOrdered()
+            min()
+            max()
+            reduce()
 
 we have to look at shortcomings of earlier versions till Java 1.7
 
@@ -19,7 +59,7 @@ we have to look at shortcomings of earlier versions till Java 1.7
     Again, to process Arrays for filtering, sorting, counting, iterating, finding, etc.
     we have to explicitly write number of lines of code
 
-**Collection and Arrays stores objects/elements but their processing like sorting, filtering, counting, iterating, etc. 
+**Collection and Arrays stores objects/elements but their processing like sorting, filtering, counting, iterating, etc.
 isn’t feasible directly and we have to write many lines of code to achieve this manually.**
 
 ## But Stream API introduced in Java 1.8 version comes to rescue to process objects/elements stored in Collection/Arrays in a elegant way.
@@ -81,6 +121,58 @@ isn’t feasible directly and we have to write many lines of code to achieve thi
             4
             6
             8
+
+# Different ways of Create a Stream
+
+    //1.From Collection
+
+    List<Integer> list = Arrays.asList(34,23,32,11,3);
+    Stream<Integer> streamFromList = list.stream();
+
+    //2.From Array
+
+    Integer[] array = {23,56,2};
+    Stream<Integer> streamFromArray = Arrays.stream(array);
+
+    //3.From Static Method
+
+    Stream<Integer> streamFromStaticMethod = Stream.of(23,1,34,35,3,2,89);
+
+    //4.From Stream Builder
+
+    Stream.Builder<Integer> streamBuilder = Stream.builder();
+    streamBuilder.add(23).add(34).add(2).add(99);
+
+    Stream<Integer> streamFromStreamBuilder = streamBuilder.build();
+
+    //5.From Stream Iterate
+
+    Stream<Integer> streamFromStreamIterator = Stream.iterate(100,(Integer n) ->n + 500).limit(5);
+
+# Different Intermediate Operations
+![img_1](https://github.com/user-attachments/assets/e7d9e191-ef45-48f4-8444-72ec2e99e8bf)
+![img_2](https://github.com/user-attachments/assets/8f02fc1c-216d-4056-919d-c0ee470a8eb6)
+![img_3](https://github.com/user-attachments/assets/ca3a3e3c-8501-414d-b9f6-ef5c1a4758ff)
+![image](https://github.com/user-attachments/assets/06f97d8e-3a21-4088-b358-06ca72571bff)
+
+
+# Why we call Intermediate operations "LAZY"
+
+As there is No Terminal Operator is specified at the end of the stream , No Intermediate Operations will invoked
+![image](https://github.com/user-attachments/assets/27710a82-ce31-43b1-a6fb-a3c5cfe7683d)
+
+# Sequence of Stream Operations
+![image](https://github.com/user-attachments/assets/7446ade9-7dc8-420a-ab02-8688a91b63f0)
+
+# Parallel Stream
+
+    -It helps to perform operation on Stream Concurrently,taking advantage of multi Cores CPU 
+    -Inorder to perform, parallelStream() method is used in place of regulat Stream method
+    -Internally does:
+        - Task Splitting : it uses "spliterator" function to split the data into multiple chunks
+        - Task Submission & parallel processing : Uses Fork-Join pool technique
+
+![image](https://github.com/user-attachments/assets/533b123f-89fa-4b7b-99b7-e3864566fb57)
 
 # Stream example to get String with length greater than 5 from List of Strings
 
@@ -203,35 +295,4 @@ isn’t feasible directly and we have to write many lines of code to achieve thi
             RICHARDS
             RANATUNGA
 
-As we have seen in earlier section that, operation are divided into Intermediate and Terminal operation. 
-There are wide range of useful Stream API (function/method) available. We will categorize them below,
-
-    Intermediate operation :
-            distinct()
-            filter()
-            map()
-            flatMap()
-            limit()
-            skip()
-            peek()
-            sorted()
-            concat()
-            empty()
-            generate()
-            iterate()
-            of()
-    
-    Terminal operation :
-            allMatch()
-            anyMatch()
-            noneMatch()
-            collect()
-            count()
-            findAny()
-            findFirst()
-            forEach()
-            forEachOrdered()
-            min()
-            max()
-            reduce()
 
